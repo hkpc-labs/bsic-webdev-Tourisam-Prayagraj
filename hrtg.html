@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayagraj Heritage Sites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: orangered;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: orangered;
+            padding: 10px 0;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .site {
+            background-color: white;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+        .site h2 {
+            color: #333;
+        }
+        .site p {
+            color: #555;
+        }
+       
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Prayagraj Heritage Sites</h1>
+    </header>
+    <nav>
+        <a onclick="showModal('triveni-sangam')">Triveni Sangam</a>
+        <a onclick="showModal('allahabad-fort')">Allahabad Fort</a>
+        <a onclick="showModal('mayo-memorial-hall')">Mayo Memorial Hall</a>
+        <a onclick="showModal('allahabad-museum')">Allahabad Museum</a>
+        <a onclick="showModal('khusro-bagh')">Khusro Bagh</a>
+    </nav>
+    <div class="container">
+        <div id="triveni-sangam" class="site" onclick="showModal('triveni-sangam')">
+            <h2>Triveni Sangam</h2>
+            <p>The sacred confluence of the Ganga, Yamuna, and Saraswati rivers. Pilgrims flock here for holy dips.</p>
+        </div>
+        <div id="allahabad-fort" class="site" onclick="showModal('allahabad-fort')">
+            <h2>Allahabad Fort</h2>
+            <p>Perched on the banks of the Yamuna, this fort is a blend of Persian and Mughal architecture, built by Emperor Akbar.</p>
+        </div>
+        <div id="mayo-memorial-hall" class="site" a onclick="showModal('mayo-memorial-hall'>
+            <h2>Mayo Memorial Hall</h2>
+            <p>Built in 1879, this hall is a fine example of colonial architecture, used for public meetings and receptions.</p>
+        </div>
+        <div id="allahabad-museum" class="site" onclick="showModal('allahabad-museum')">
+            <h2>Allahabad Museum</h2>
+            <p>Located in Chandrashekhar Park, this museum houses a vast collection of artifacts, including terracotta from Kaushambi.</p>
+        </div>
+        <div id="khusro-bagh" class="site" onclick="showModal('khusro-bagh')">
+            <h2>Khusro Bagh</h2>
+            <p>An exquisite Mughal garden, Khusro Bagh is the resting place of Prince Khusro, the eldest son of Emperor Jahangir.</p>
+        </div>
+    </div>
+
+  
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const heritageDetails = {
+            "triveni-sangam": {
+                title: "Triveni Sangam",
+                image: "img/k1.png",
+                details: "Triveni Sangam is the sacred confluence of three rivers: Ganga, Yamuna, and the mythical Saraswati. It is a major pilgrimage site, attracting millions of devotees for holy dips, especially during the Kumbh Mela."
+            },
+            "allahabad-fort": {
+                title: "Allahabad Fort",
+                image: "img/i2.png",
+                details: "Built by Emperor Akbar in 1583, Allahabad Fort stands on the banks of the Yamuna. It is known for its majestic architecture, blending Persian and Mughal styles, and houses the Ashoka Pillar and Saraswati Koop."
+            },
+            "mayo-memorial-hall": {
+                title: "Mayo Memorial Hall",
+                image: "img/k2.png",
+                details: "Constructed in 1879, Mayo Memorial Hall is a splendid example of colonial architecture. It was designed by Richard Roskell Bayne and is used for public meetings, exhibitions, and cultural events."
+            },
+            "allahabad-museum": {
+                title: "Allahabad Museum",
+                image: "https://example.com/allahabad-museum.jpg",
+                details: "Located in Chandrashekhar Azad Park, Allahabad Museum is a treasure trove of historical artifacts. It houses collections ranging from prehistoric items to contemporary art, including terracotta from Kaushambi."
+            },
+            "khusro-bagh": {
+                title: "Khusro Bagh",
+                image: "https://example.com/khusro-bagh.jpg",
+                details: "Khusro Bagh is a Mughal garden and burial complex that contains the tombs of Prince Khusro, the eldest son of Emperor Jahangir, his mother Shah Begum, and his sister Nithar Begum. It is known for its intricate architecture and lush greenery."
+            }
+        };
+
+        function showModal(siteId) {
+            const modal = document.getElementById('myModal');
+            const modalBody = document.getElementById('modal-body');
+            const site = heritageDetails[siteId];
+
+            modalBody.innerHTML = `
+                <h2>${site.title}</h2>
+                <img src="${site.image}" alt="${site.title}" style="width:100%;height:auto;">
+                <p>${site.details}</p>
+            `;
+
+            modal.style.display = "block";
+        }
+
+        const closeModal = () => {
+            document.getElementById('myModal').style.display = "none";
+        };
+
+        document.querySelector('.close').onclick = closeModal;
+        window.onclick = event => {
+            if (event.target == document.getElementById('myModal')) {
+                closeModal();
+            }
+        };
+    </script>
+       <footer style="height: 100px; background-color: black;
+       color:white; width: 100%;">
+           <center>
+               <p>
+                   copyright &COPY; All rights reserved 2025
+               </p>
+           </center>
+   
+       </footer>
+</body>
+</html>
